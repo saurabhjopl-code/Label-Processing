@@ -25,7 +25,7 @@ let selectedStyle = null;
 let selectedSize = null;
 let selectedSKU = null;
 
-// Master sizes (authoritative)
+// 🔒 AUTHORITATIVE SIZE SEQUENCE
 const MASTER_SIZES = [
   "FS","XS","S","M","L","XL","XXL",
   "3XL","4XL","5XL","6XL","7XL","8XL","9XL","10XL"
@@ -67,20 +67,26 @@ function selectStyle(style) {
 }
 
 // -------------------------------
-// SIZE DROPDOWN
+// SIZE DROPDOWN (SORTED)
 // -------------------------------
 function populateSizeDropdown() {
   sizeSelect.innerHTML = `<option value="">Select Size</option>`;
 
   const existingSizes = Object.keys(styleIndex[selectedStyle] || {});
 
-  existingSizes.forEach(size => {
+  // ✅ SORT USING MASTER SEQUENCE
+  const sortedExistingSizes = MASTER_SIZES.filter(size =>
+    existingSizes.includes(size)
+  );
+
+  sortedExistingSizes.forEach(size => {
     const opt = document.createElement("option");
     opt.value = size;
     opt.textContent = size;
     sizeSelect.appendChild(opt);
   });
 
+  // Always allow Add Size
   const addOpt = document.createElement("option");
   addOpt.value = "__ADD_SIZE__";
   addOpt.textContent = "Add Size";
@@ -108,14 +114,14 @@ sizeSelect.addEventListener("change", () => {
 });
 
 // -------------------------------
-// ADD SIZE FLOW
+// ADD SIZE FLOW (SORTED)
 // -------------------------------
 function showMissingSizeDropdown() {
   removeMissingDropdown();
 
   const existingSizes = Object.keys(styleIndex[selectedStyle] || {});
   const missingSizes = MASTER_SIZES.filter(
-    s => !existingSizes.includes(s)
+    size => !existingSizes.includes(size)
   );
 
   if (!missingSizes.length) {
