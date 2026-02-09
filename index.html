@@ -22,23 +22,19 @@
 
   <div class="card">
 
-    <!-- LOT ID -->
     <div class="form-group lot-id-group">
       <label>Lot ID</label>
       <input type="text" class="input" placeholder="Lot ID" />
     </div>
 
-    <!-- SEARCH -->
     <div class="form-group">
       <label>Search Style</label>
       <input type="text" class="input" placeholder="Enter Style ID" />
       <div class="dropdown"></div>
     </div>
 
-    <!-- SIZE (HIDDEN UNTIL STYLE SELECTED) -->
     <div class="form-group size-section hidden">
       <label>Size</label>
-
       <select class="size-select">
         <option>Select Size</option>
         <option>Add Size</option>
@@ -63,13 +59,11 @@
       </div>
     </div>
 
-    <!-- LABEL UNITS (HIDDEN UNTIL SIZE) -->
     <div class="form-group label-section hidden">
       <label>Label Units</label>
       <input type="number" class="input" placeholder="Enter label quantity" />
     </div>
 
-    <!-- IMAGE -->
     <div class="image-panel">
       <div class="image-box">
         <img src="images/placeholder.png" alt="Preview" />
@@ -80,12 +74,10 @@
       </div>
     </div>
 
-    <!-- SAVE -->
     <div class="action-bar center">
       <button class="save-btn">Save</button>
     </div>
 
-    <!-- PENDING -->
     <div class="pending-section">
       <h3>Pending Submission</h3>
 
@@ -107,7 +99,6 @@
       </table>
     </div>
 
-    <!-- SUBMIT -->
     <div class="action-bar center">
       <button class="submit-btn">Submit</button>
     </div>
@@ -115,6 +106,9 @@
   </div>
 
 </main>
+
+<!-- 🔴 REQUIRED: LOAD APP AS MODULE -->
+<script type="module" src="js/app.js"></script>
 
 </body>
 </html>
