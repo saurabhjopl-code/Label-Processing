@@ -1,17 +1,10 @@
-// ===============================
-// DATA LOADER & INDEXER
-// ===============================
-
 import { UNIWARE_CSV_URL, IMAGE_CSV_URL } from "./config.js";
 
-// In-memory stores
 export let uniwareRows = [];
 export let styleIndex = {};
 export let imageIndex = {};
 
-// -------------------------------
-// CSV PARSER
-// -------------------------------
+// ---------------- CSV PARSER ----------------
 function parseCSV(text) {
   const lines = text.trim().split("\n");
   const headers = lines.shift().split(",").map(h => h.trim());
@@ -26,18 +19,17 @@ function parseCSV(text) {
   });
 }
 
-// -------------------------------
-// LOAD UNIWARE STOCK
-// -------------------------------
+// ---------------- LOAD UNIWARE ----------------
 async function loadUniwareStock() {
+  console.log("🔄 Loading Uniware CSV...");
   const res = await fetch(UNIWARE_CSV_URL);
+
+  if (!res.ok) {
+    throw new Error("Uniware CSV fetch failed: " + res.status);
+  }
+
   const text = await res.text();
   uniwareRows = parseCSV(text);
-
-  /*
-    Expected headers:
-    Sku Code | Style ID | Size | Stock
-  */
 
   styleIndex = {};
 
@@ -46,21 +38,28 @@ async function loadUniwareStock() {
     const style = row["Style ID"];
     const size = row["Size"];
 
+    if (!style) return;
+
     if (!styleIndex[style]) {
       styleIndex[style] = {};
     }
 
-    if (!styleIndex[style][size]) {
-      styleIndex[style][size] = sku;
-    }
+    styleIndex[style][size] = sku;
   });
+
+  console.log("✅ Uniware rows:", uniwareRows.length);
+  console.log("✅ Styles loaded:", Object.keys(styleIndex).length);
 }
 
-// -------------------------------
-// LOAD IMAGE MASTER
-// -------------------------------
+// ---------------- LOAD IMAGE MASTER ----------------
 async function loadImageMaster() {
+  console.log("🔄 Loading Image Master CSV...");
   const res = await fetch(IMAGE_CSV_URL);
+
+  if (!res.ok) {
+    throw new Error("Image CSV fetch failed: " + res.status);
+  }
+
   const text = await res.text();
   const rows = parseCSV(text);
 
@@ -68,25 +67,20 @@ async function loadImageMaster() {
 
   rows.forEach(row => {
     const sku = row["SKU"];
+    if (!sku) return;
+
     imageIndex[sku] = {
       image: row["ImageLink"],
       title: row["Title"],
       category: row["Category"]
     };
   });
-}
 
-// -------------------------------
-// PUBLIC INIT
-// -------------------------------
-export async function loadAllData() {
-  await Promise.all([
-    loadUniwareStock(),
-    loadImageMaster()
-  ]);
-
-  console.log("✅ Uniware rows:", uniwareRows.length);
-  console.log("✅ Styles loaded:", Object.keys(styleIndex).length);
   console.log("✅ Images loaded:", Object.keys(imageIndex).length);
 }
 
+// ---------------- INIT ----------------
+export async function loadAllData() {
+  await loadUniwareStock();
+  await loadImageMaster();
+}
