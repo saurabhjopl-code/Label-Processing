@@ -1,22 +1,31 @@
 // ===============================
-// STYLE SEARCH LOGIC
+// STYLE + SIZE SEARCH LOGIC
 // ===============================
 
 import { styleIndex, imageIndex } from "./data.js";
 
+// DOM
 const styleInput = document.querySelector("#styleSearch");
 const dropdown = document.querySelector(".dropdown");
 const sizeSection = document.querySelector(".size-section");
-const sizeSelect = document.querySelector(".size-select");
+const sizeSelect = document.querySelector("#sizeSelect");
 const imageEl = document.querySelector(".image-box img");
 const titleEl = document.querySelector(".meta-title");
 const categoryEl = document.querySelector(".meta-category");
 
+// State
 let selectedStyle = null;
+let selectedSize = null;
 let selectedSKU = null;
 
+// Master sizes
+const MASTER_SIZES = [
+  "FS","XS","S","M","L","XL","XXL",
+  "3XL","4XL","5XL","6XL","7XL","8XL","9XL","10XL"
+];
+
 // -------------------------------
-// BUILD DROPDOWN
+// STYLE DROPDOWN
 // -------------------------------
 function renderDropdown(styles) {
   dropdown.innerHTML = "";
@@ -25,7 +34,6 @@ function renderDropdown(styles) {
     const div = document.createElement("div");
     div.textContent = style;
     div.className = "dropdown-item";
-
     div.onclick = () => selectStyle(style);
     dropdown.appendChild(div);
   });
@@ -34,47 +42,117 @@ function renderDropdown(styles) {
 }
 
 // -------------------------------
-// STYLE SELECTION
+// STYLE SELECT
 // -------------------------------
 function selectStyle(style) {
   selectedStyle = style;
   styleInput.value = style;
   dropdown.style.display = "none";
 
-  populateSizes(style);
+  populateSizeDropdown();
 }
 
 // -------------------------------
-// SIZE POPULATION
+// SIZE DROPDOWN (PRIMARY)
 // -------------------------------
-function populateSizes(style) {
-  sizeSelect.innerHTML = `<option>Select Size</option>`;
+function populateSizeDropdown() {
+  sizeSelect.innerHTML = `<option value="">Select Size</option>`;
 
-  const sizes = Object.keys(styleIndex[style] || {});
-  if (!sizes.length) {
-    sizeSelect.innerHTML += `<option>Add Size</option>`;
-  } else {
-    sizes.forEach(size => {
-      const opt = document.createElement("option");
-      opt.value = size;
-      opt.textContent = size;
-      sizeSelect.appendChild(opt);
-    });
-  }
+  const existingSizes = Object.keys(styleIndex[selectedStyle] || {});
+
+  existingSizes.forEach(size => {
+    const opt = document.createElement("option");
+    opt.value = size;
+    opt.textContent = size;
+    sizeSelect.appendChild(opt);
+  });
+
+  // Always add Add Size option
+  const addOpt = document.createElement("option");
+  addOpt.value = "__ADD_SIZE__";
+  addOpt.textContent = "Add Size";
+  sizeSelect.appendChild(addOpt);
 
   sizeSection.classList.remove("hidden");
 }
 
 // -------------------------------
-// SIZE CHANGE
+// SIZE CHANGE HANDLER
 // -------------------------------
 sizeSelect.addEventListener("change", () => {
-  const size = sizeSelect.value;
-  if (!size || size === "Select Size") return;
+  const value = sizeSelect.value;
+  if (!value) return;
 
-  selectedSKU = styleIndex[selectedStyle][size];
-  updateImage(selectedSKU);
+  if (value === "__ADD_SIZE__") {
+    showMissingSizeDropdown();
+    return;
+  }
+
+  finalizeSize(value);
 });
+
+// -------------------------------
+// MISSING SIZE DROPDOWN
+// -------------------------------
+function showMissingSizeDropdown() {
+  removeMissingDropdown();
+
+  const existingSizes = Object.keys(styleIndex[selectedStyle] || {});
+  const missingSizes = MASTER_SIZES.filter(
+    s => !existingSizes.includes(s)
+  );
+
+  if (!missingSizes.length) {
+    alert("No additional sizes available.");
+    sizeSelect.value = "";
+    return;
+  }
+
+  const select = document.createElement("select");
+  select.className = "size-select";
+  select.id = "missingSizeSelect";
+
+  select.innerHTML = `<option value="">Select Missing Size</option>`;
+
+  missingSizes.forEach(size => {
+    const opt = document.createElement("option");
+    opt.value = size;
+    opt.textContent = size;
+    select.appendChild(opt);
+  });
+
+  select.addEventListener("change", () => {
+    if (select.value) {
+      finalizeSize(select.value);
+      removeMissingDropdown();
+    }
+  });
+
+  sizeSection.appendChild(select);
+}
+
+// -------------------------------
+// CLEANUP
+// -------------------------------
+function removeMissingDropdown() {
+  const existing = document.querySelector("#missingSizeSelect");
+  if (existing) existing.remove();
+}
+
+// -------------------------------
+// FINALIZE SIZE
+// -------------------------------
+function finalizeSize(size) {
+  selectedSize = size;
+  sizeSelect.value = size;
+
+  // SKU exists only if size exists in Uniware
+  selectedSKU = styleIndex[selectedStyle][size] || null;
+
+  if (selectedSKU) {
+    updateImage(selectedSKU);
+  }
+}
 
 // -------------------------------
 // IMAGE UPDATE
@@ -89,7 +167,7 @@ function updateImage(sku) {
 }
 
 // -------------------------------
-// INPUT LISTENER
+// INIT
 // -------------------------------
 export function initStyleSearch() {
   styleInput.addEventListener("input", e => {
@@ -106,4 +184,3 @@ export function initStyleSearch() {
     renderDropdown(matches);
   });
 }
-
