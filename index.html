@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <title>Label Management</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- UI -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -80,7 +82,6 @@
 
     <div class="pending-section">
       <h3>Pending Submission</h3>
-
       <table class="pending-table">
         <thead>
           <tr>
@@ -107,8 +108,11 @@
 
 </main>
 
-<!-- 🔴 REQUIRED: LOAD APP AS MODULE -->
-<script type="module" src="js/app.js"></script>
+<!-- 🔥 FORCE MODULE LOAD -->
+<script type="module">
+  console.log("🔥 inline module running");
+  import "./js/app.js";
+</script>
 
 </body>
 </html>
