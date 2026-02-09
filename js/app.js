@@ -1,7 +1,3 @@
-// ===============================
-// APP BOOTSTRAP
-// ===============================
-
 import { loadAllData } from "./data.js";
 import { initStyleSearch } from "./search.js";
 
@@ -14,9 +10,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadAllData();
     console.log("🚀 App data ready");
 
-    initStyleSearch();
+    initStyleSearch(); // UI wiring
   } catch (err) {
-    console.error("❌ DATA LOAD ERROR:", err);
-    alert("Failed to load stock data. Check console.");
+    console.error("❌ RUNTIME ERROR:", err);
+    alert("Application error. Check console.");
   }
 });
