@@ -12,6 +12,10 @@ const sizeSelect = document.querySelector("#sizeSelect");
 const labelInput = document.querySelector("#labelUnits");
 const saveBtn = document.querySelector(".save-btn");
 
+// ❌ PERMANENTLY DISABLE SIZE GRID
+const sizeGrid = document.querySelector(".size-grid");
+if (sizeGrid) sizeGrid.style.display = "none";
+
 const imageEl = document.querySelector(".image-box img");
 const titleEl = document.querySelector(".meta-title");
 const categoryEl = document.querySelector(".meta-category");
@@ -21,7 +25,7 @@ let selectedStyle = null;
 let selectedSize = null;
 let selectedSKU = null;
 
-// Master sizes
+// Master sizes (authoritative)
 const MASTER_SIZES = [
   "FS","XS","S","M","L","XL","XXL",
   "3XL","4XL","5XL","6XL","7XL","8XL","9XL","10XL"
@@ -161,13 +165,12 @@ function finalizeSize(size) {
     updateImage(selectedSKU);
   }
 
-  // Enable label input
   labelInput.disabled = false;
   labelInput.focus();
 }
 
 // -------------------------------
-// LABEL UNITS LOGIC
+// LABEL UNITS
 // -------------------------------
 labelInput.addEventListener("input", () => {
   const val = Number(labelInput.value);
