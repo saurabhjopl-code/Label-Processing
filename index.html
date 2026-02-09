@@ -27,12 +27,7 @@
       <!-- LOT ID -->
       <div class="form-group lot-id-group">
         <label for="lotId">Lot ID</label>
-        <input
-          id="lotId"
-          type="text"
-          class="input lot-id-input"
-          placeholder="Lot ID"
-        />
+        <input id="lotId" type="text" class="input" placeholder="Lot ID" />
       </div>
 
       <!-- SEARCH + IMAGE -->
@@ -43,12 +38,12 @@
 
           <!-- STYLE SEARCH -->
           <div class="form-group">
-            <label for="searchStyle">Search Style</label>
+            <label for="styleSearch">Search Style</label>
             <input
-              id="searchStyle"
+              id="styleSearch"
               type="text"
               class="input"
-              placeholder="Type Style ID"
+              placeholder="Enter Style ID"
             />
             <div class="dropdown"></div>
           </div>
@@ -57,13 +52,13 @@
           <div class="form-group">
             <label>Size</label>
 
-            <!-- Default state -->
+            <!-- Populated from Uniware sheet (logic later) -->
             <select class="size-select">
               <option>Select Size</option>
               <option>Add Size</option>
             </select>
 
-            <!-- Add size (hidden initially – UI only) -->
+            <!-- Add Size Options -->
             <div class="size-grid hidden">
               <button class="size-btn">FS</button>
               <button class="size-btn">XS</button>
@@ -81,6 +76,17 @@
               <button class="size-btn">9XL</button>
               <button class="size-btn">10XL</button>
             </div>
+          </div>
+
+          <!-- LABEL UNITS -->
+          <div class="form-group">
+            <label for="labelUnits">Label Units</label>
+            <input
+              id="labelUnits"
+              type="number"
+              class="input"
+              placeholder="Enter label quantity"
+            />
           </div>
 
         </div>
@@ -103,7 +109,7 @@
         <button class="save-btn">Save</button>
       </div>
 
-      <!-- PENDING TABLE -->
+      <!-- PENDING SUBMISSION -->
       <div class="pending-section">
         <h3>Pending Submission</h3>
 
@@ -111,13 +117,15 @@
           <thead>
             <tr>
               <th>Lot ID</th>
+              <th>SKU</th>
               <th>Style</th>
               <th>Size</th>
+              <th>Label Units</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td colspan="3" class="empty">
+              <td colspan="5" class="empty">
                 No pending submission
               </td>
             </tr>
