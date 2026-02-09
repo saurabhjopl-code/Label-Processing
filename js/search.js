@@ -1,5 +1,5 @@
 // ===============================
-// STYLE + SIZE SEARCH LOGIC
+// STYLE + SIZE + LABEL FLOW LOGIC
 // ===============================
 
 import { styleIndex, imageIndex } from "./data.js";
@@ -9,6 +9,9 @@ const styleInput = document.querySelector("#styleSearch");
 const dropdown = document.querySelector(".dropdown");
 const sizeSection = document.querySelector(".size-section");
 const sizeSelect = document.querySelector("#sizeSelect");
+const labelInput = document.querySelector("#labelUnits");
+const saveBtn = document.querySelector(".save-btn");
+
 const imageEl = document.querySelector(".image-box img");
 const titleEl = document.querySelector(".meta-title");
 const categoryEl = document.querySelector(".meta-category");
@@ -23,6 +26,12 @@ const MASTER_SIZES = [
   "FS","XS","S","M","L","XL","XXL",
   "3XL","4XL","5XL","6XL","7XL","8XL","9XL","10XL"
 ];
+
+// -------------------------------
+// INITIAL UI STATE
+// -------------------------------
+labelInput.disabled = true;
+saveBtn.disabled = true;
 
 // -------------------------------
 // STYLE DROPDOWN
@@ -49,11 +58,12 @@ function selectStyle(style) {
   styleInput.value = style;
   dropdown.style.display = "none";
 
+  resetSizeAndLabel();
   populateSizeDropdown();
 }
 
 // -------------------------------
-// SIZE DROPDOWN (PRIMARY)
+// SIZE DROPDOWN
 // -------------------------------
 function populateSizeDropdown() {
   sizeSelect.innerHTML = `<option value="">Select Size</option>`;
@@ -67,7 +77,6 @@ function populateSizeDropdown() {
     sizeSelect.appendChild(opt);
   });
 
-  // Always add Add Size option
   const addOpt = document.createElement("option");
   addOpt.value = "__ADD_SIZE__";
   addOpt.textContent = "Add Size";
@@ -77,10 +86,13 @@ function populateSizeDropdown() {
 }
 
 // -------------------------------
-// SIZE CHANGE HANDLER
+// SIZE CHANGE
 // -------------------------------
 sizeSelect.addEventListener("change", () => {
   const value = sizeSelect.value;
+
+  resetLabelOnly();
+
   if (!value) return;
 
   if (value === "__ADD_SIZE__") {
@@ -92,7 +104,7 @@ sizeSelect.addEventListener("change", () => {
 });
 
 // -------------------------------
-// MISSING SIZE DROPDOWN
+// ADD SIZE FLOW
 // -------------------------------
 function showMissingSizeDropdown() {
   removeMissingDropdown();
@@ -109,8 +121,8 @@ function showMissingSizeDropdown() {
   }
 
   const select = document.createElement("select");
-  select.className = "size-select";
   select.id = "missingSizeSelect";
+  select.className = "size-select";
 
   select.innerHTML = `<option value="">Select Missing Size</option>`;
 
@@ -131,12 +143,9 @@ function showMissingSizeDropdown() {
   sizeSection.appendChild(select);
 }
 
-// -------------------------------
-// CLEANUP
-// -------------------------------
 function removeMissingDropdown() {
-  const existing = document.querySelector("#missingSizeSelect");
-  if (existing) existing.remove();
+  const el = document.querySelector("#missingSizeSelect");
+  if (el) el.remove();
 }
 
 // -------------------------------
@@ -146,13 +155,24 @@ function finalizeSize(size) {
   selectedSize = size;
   sizeSelect.value = size;
 
-  // SKU exists only if size exists in Uniware
   selectedSKU = styleIndex[selectedStyle][size] || null;
 
   if (selectedSKU) {
     updateImage(selectedSKU);
   }
+
+  // Enable label input
+  labelInput.disabled = false;
+  labelInput.focus();
 }
+
+// -------------------------------
+// LABEL UNITS LOGIC
+// -------------------------------
+labelInput.addEventListener("input", () => {
+  const val = Number(labelInput.value);
+  saveBtn.disabled = !(val > 0);
+});
 
 // -------------------------------
 // IMAGE UPDATE
@@ -164,6 +184,21 @@ function updateImage(sku) {
   imageEl.src = img.image;
   titleEl.textContent = img.title || "";
   categoryEl.textContent = img.category || "";
+}
+
+// -------------------------------
+// RESET HELPERS
+// -------------------------------
+function resetSizeAndLabel() {
+  sizeSelect.value = "";
+  removeMissingDropdown();
+  resetLabelOnly();
+}
+
+function resetLabelOnly() {
+  labelInput.value = "";
+  labelInput.disabled = true;
+  saveBtn.disabled = true;
 }
 
 // -------------------------------
