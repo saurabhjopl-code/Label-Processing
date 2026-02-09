@@ -73,8 +73,6 @@ function populateSizeDropdown() {
   sizeSelect.innerHTML = `<option value="">Select Size</option>`;
 
   const existingSizes = Object.keys(styleIndex[selectedStyle] || {});
-
-  // ✅ SORT USING MASTER SEQUENCE
   const sortedExistingSizes = MASTER_SIZES.filter(size =>
     existingSizes.includes(size)
   );
@@ -86,7 +84,6 @@ function populateSizeDropdown() {
     sizeSelect.appendChild(opt);
   });
 
-  // Always allow Add Size
   const addOpt = document.createElement("option");
   addOpt.value = "__ADD_SIZE__";
   addOpt.textContent = "Add Size";
@@ -114,7 +111,7 @@ sizeSelect.addEventListener("change", () => {
 });
 
 // -------------------------------
-// ADD SIZE FLOW (SORTED)
+// ADD SIZE FLOW
 // -------------------------------
 function showMissingSizeDropdown() {
   removeMissingDropdown();
@@ -176,11 +173,23 @@ function finalizeSize(size) {
 }
 
 // -------------------------------
-// LABEL UNITS
+// 🔒 LABEL UNITS – NUMERIC ONLY
 // -------------------------------
 labelInput.addEventListener("input", () => {
+  // Remove everything except digits
+  labelInput.value = labelInput.value.replace(/[^0-9]/g, "");
+
   const val = Number(labelInput.value);
-  saveBtn.disabled = !(val > 0);
+  saveBtn.disabled = !(val >= 1);
+});
+
+// Prevent non-numeric key presses (extra safety)
+labelInput.addEventListener("keydown", e => {
+  if (
+    ["e", "E", "+", "-", ".", ","].includes(e.key)
+  ) {
+    e.preventDefault();
+  }
 });
 
 // -------------------------------
