@@ -8,139 +8,121 @@
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="app-header">
-    <div class="header-left">
-      <img src="images/logo.png" class="logo" alt="Logo" />
+<header class="app-header">
+  <div class="header-left">
+    <img src="images/logo.png" class="logo" alt="Logo" />
+  </div>
+  <div class="header-center">
+    <h1>Label Management</h1>
+  </div>
+  <div class="header-right"></div>
+</header>
+
+<main class="app-container">
+
+  <div class="card">
+
+    <!-- LOT ID -->
+    <div class="form-group lot-id-group">
+      <label>Lot ID</label>
+      <input type="text" class="input" placeholder="Lot ID" />
     </div>
-    <div class="header-center">
-      <h1>Label Management</h1>
-    </div>
-    <div class="header-right"></div>
-  </header>
 
-  <!-- MAIN -->
-  <main class="app-container">
+    <!-- SEARCH + IMAGE -->
+    <div class="search-image-wrapper">
 
-    <div class="card">
+      <div class="search-panel">
 
-      <!-- LOT ID -->
-      <div class="form-group lot-id-group">
-        <label for="lotId">Lot ID</label>
-        <input id="lotId" type="text" class="input" placeholder="Lot ID" />
-      </div>
-
-      <!-- SEARCH + IMAGE -->
-      <div class="search-image-wrapper">
-
-        <!-- LEFT -->
-        <div class="search-panel">
-
-          <!-- STYLE SEARCH -->
-          <div class="form-group">
-            <label for="styleSearch">Search Style</label>
-            <input
-              id="styleSearch"
-              type="text"
-              class="input"
-              placeholder="Enter Style ID"
-            />
-            <div class="dropdown"></div>
-          </div>
-
-          <!-- SIZE -->
-          <div class="form-group">
-            <label>Size</label>
-
-            <!-- Populated from Uniware sheet (logic later) -->
-            <select class="size-select">
-              <option>Select Size</option>
-              <option>Add Size</option>
-            </select>
-
-            <!-- Add Size Options -->
-            <div class="size-grid hidden">
-              <button class="size-btn">FS</button>
-              <button class="size-btn">XS</button>
-              <button class="size-btn">S</button>
-              <button class="size-btn">M</button>
-              <button class="size-btn">L</button>
-              <button class="size-btn">XL</button>
-              <button class="size-btn">XXL</button>
-              <button class="size-btn">3XL</button>
-              <button class="size-btn">4XL</button>
-              <button class="size-btn">5XL</button>
-              <button class="size-btn">6XL</button>
-              <button class="size-btn">7XL</button>
-              <button class="size-btn">8XL</button>
-              <button class="size-btn">9XL</button>
-              <button class="size-btn">10XL</button>
-            </div>
-          </div>
-
-          <!-- LABEL UNITS -->
-          <div class="form-group">
-            <label for="labelUnits">Label Units</label>
-            <input
-              id="labelUnits"
-              type="number"
-              class="input"
-              placeholder="Enter label quantity"
-            />
-          </div>
-
+        <div class="form-group">
+          <label>Search Style</label>
+          <input type="text" class="input" placeholder="Enter Style ID" />
+          <div class="dropdown"></div>
         </div>
 
-        <!-- RIGHT -->
-        <div class="image-panel">
-          <div class="image-box">
-            <img src="images/placeholder.png" alt="Preview" />
+        <div class="form-group">
+          <label>Size</label>
+          <select class="size-select">
+            <option>Select Size</option>
+            <option>Add Size</option>
+          </select>
+
+          <div class="size-grid hidden">
+            <button class="size-btn">FS</button>
+            <button class="size-btn">XS</button>
+            <button class="size-btn">S</button>
+            <button class="size-btn">M</button>
+            <button class="size-btn">L</button>
+            <button class="size-btn">XL</button>
+            <button class="size-btn">XXL</button>
+            <button class="size-btn">3XL</button>
+            <button class="size-btn">4XL</button>
+            <button class="size-btn">5XL</button>
+            <button class="size-btn">6XL</button>
+            <button class="size-btn">7XL</button>
+            <button class="size-btn">8XL</button>
+            <button class="size-btn">9XL</button>
+            <button class="size-btn">10XL</button>
           </div>
-          <div class="image-meta">
-            <div class="meta-title">Title</div>
-            <div class="meta-category">Category</div>
-          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Label Units</label>
+          <input type="number" class="input" placeholder="Enter label quantity" />
         </div>
 
       </div>
 
-      <!-- SAVE -->
-      <div class="action-bar center">
-        <button class="save-btn">Save</button>
-      </div>
-
-      <!-- PENDING SUBMISSION -->
-      <div class="pending-section">
-        <h3>Pending Submission</h3>
-
-        <table class="pending-table">
-          <thead>
-            <tr>
-              <th>Lot ID</th>
-              <th>SKU</th>
-              <th>Style</th>
-              <th>Size</th>
-              <th>Label Units</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colspan="5" class="empty">
-                No pending submission
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- SUBMIT -->
-      <div class="action-bar center">
-        <button class="submit-btn">Submit</button>
+      <div class="image-panel">
+        <div class="image-box">
+          <img src="images/placeholder.png" alt="Preview" />
+        </div>
+        <div class="image-meta">
+          <div class="meta-title">Title</div>
+          <div class="meta-category">Category</div>
+        </div>
       </div>
 
     </div>
 
-  </main>
+    <!-- SAVE -->
+    <div class="action-bar center">
+      <button class="save-btn">Save</button>
+    </div>
+
+    <!-- PENDING -->
+    <div class="pending-section">
+      <h3>Pending Submission</h3>
+
+      <table class="pending-table">
+        <thead>
+          <tr>
+            <th>Lot ID</th>
+            <th>SKU</th>
+            <th>Style</th>
+            <th>Size</th>
+            <th>Label Units</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Lot ID">LOT001</td>
+            <td data-label="SKU">SKU123</td>
+            <td data-label="Style">STY009</td>
+            <td data-label="Size">M</td>
+            <td data-label="Label Units">10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="action-bar center">
+      <button class="submit-btn">Submit</button>
+    </div>
+
+  </div>
+
+</main>
 
 </body>
 </html>
