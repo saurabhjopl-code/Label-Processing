@@ -1,4 +1,6 @@
-/* RESET */
+/* ================================
+   RESET & BASE
+================================ */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,23 +8,24 @@
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* COLORS */
 :root {
   --bg: #f6f8fb;
   --card: #ffffff;
   --primary: #2563eb;
+  --primary-hover: #1e4ed8;
   --border: #e5e7eb;
   --text: #111827;
   --muted: #6b7280;
 }
 
-/* BODY */
 body {
   background: var(--bg);
   color: var(--text);
 }
 
-/* HEADER */
+/* ================================
+   HEADER
+================================ */
 .app-header {
   height: 64px;
   background: #ffffff;
@@ -42,31 +45,37 @@ body {
   font-weight: 600;
 }
 
-/* MAIN */
+/* ================================
+   MAIN CONTAINER
+================================ */
 .app-container {
   max-width: 1100px;
   margin: 40px auto;
   padding: 0 24px;
 }
 
-/* CARD */
+/* ================================
+   CARD
+================================ */
 .card {
   background: var(--card);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 32px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
 }
 
-/* FORM */
+/* ================================
+   FORM ELEMENTS
+================================ */
 .form-group {
   margin-bottom: 24px;
 }
 
 label {
+  display: block;
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 6px;
-  display: block;
 }
 
 .input {
@@ -83,27 +92,33 @@ label {
   border-color: var(--primary);
 }
 
-/* SEARCH + IMAGE */
+/* ================================
+   SEARCH + IMAGE WRAPPER
+================================ */
 .search-image-wrapper {
   display: grid;
   grid-template-columns: 1fr 360px;
   gap: 32px;
 }
 
-/* DROPDOWN */
+/* ================================
+   DROPDOWN (UI ONLY)
+================================ */
 .dropdown {
   margin-top: 6px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: #fff;
+  background: #ffffff;
   min-height: 0;
 }
 
-/* SIZE */
+/* ================================
+   SIZE SELECTOR
+================================ */
 .size-grid {
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
+  gap: 8px;
   margin-bottom: 10px;
 }
 
@@ -111,9 +126,10 @@ label {
   padding: 8px 14px;
   border-radius: 20px;
   border: 1px solid var(--border);
-  background: #fff;
+  background: #ffffff;
   font-size: 13px;
   cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .size-btn:hover {
@@ -127,9 +143,12 @@ label {
   color: var(--primary);
   font-size: 13px;
   cursor: pointer;
+  padding: 0;
 }
 
-/* IMAGE PANEL */
+/* ================================
+   IMAGE PANEL
+================================ */
 .image-panel {
   border-left: 1px solid var(--border);
   padding-left: 24px;
@@ -144,6 +163,7 @@ label {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: #fafafa;
 }
 
 .image-box img {
@@ -164,7 +184,9 @@ label {
   color: var(--muted);
 }
 
-/* ACTION */
+/* ================================
+   ACTION BAR
+================================ */
 .action-bar {
   margin-top: 32px;
   text-align: right;
@@ -172,15 +194,15 @@ label {
 
 .save-btn {
   background: var(--primary);
-  color: #fff;
+  color: #ffffff;
   border: none;
-  padding: 12px 32px;
+  padding: 12px 36px;
   border-radius: 10px;
   font-size: 14px;
   cursor: pointer;
+  transition: background 0.15s ease;
 }
 
 .save-btn:hover {
-  opacity: 0.9;
+  background: var(--primary-hover);
 }
-
