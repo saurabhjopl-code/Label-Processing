@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Label Management</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-left">
+      <img src="images/logo.png" alt="Logo" class="logo" />
+    </div>
+    <div class="header-center">
+      <h1>Label Management</h1>
+    </div>
+    <div class="header-right"></div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="app-container">
+
+    <div class="card">
+
+      <!-- LOT ID -->
+      <div class="form-group">
+        <label>Lot ID</label>
+        <input
+          type="text"
+          class="input"
+          placeholder="Enter Lot ID (alphanumeric)"
+        />
+      </div>
+
+      <!-- SEARCH + IMAGE -->
+      <div class="search-image-wrapper">
+
+        <!-- LEFT -->
+        <div class="search-panel">
+
+          <div class="form-group">
+            <label>Search SKU / Style</label>
+            <input
+              type="text"
+              class="input"
+              placeholder="Search by SKU or Style ID"
+            />
+            <div class="dropdown">
+              <!-- suggestions will render here -->
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Select Size</label>
+
+            <div class="size-grid">
+              <button class="size-btn">S</button>
+              <button class="size-btn">M</button>
+              <button class="size-btn">L</button>
+              <button class="size-btn">XL</button>
+            </div>
+
+            <button class="add-size-btn">+ Add Size</button>
+          </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="image-panel">
+          <div class="image-box">
+            <img
+              src="https://via.placeholder.com/300x380?text=No+Image"
+              alt="Product Preview"
+            />
+          </div>
+
+          <div class="image-meta">
+            <div class="meta-title">Title</div>
+            <div class="meta-category">Category</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SAVE -->
+      <div class="action-bar">
+        <button class="save-btn">Save</button>
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+</html>
 
