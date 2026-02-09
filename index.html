@@ -28,60 +28,56 @@
       <input type="text" class="input" placeholder="Lot ID" />
     </div>
 
-    <!-- SEARCH + IMAGE -->
-    <div class="search-image-wrapper">
+    <!-- SEARCH -->
+    <div class="form-group">
+      <label>Search Style</label>
+      <input type="text" class="input" placeholder="Enter Style ID" />
+      <div class="dropdown"></div>
+    </div>
 
-      <div class="search-panel">
+    <!-- SIZE (HIDDEN UNTIL STYLE SELECTED) -->
+    <div class="form-group size-section hidden">
+      <label>Size</label>
 
-        <div class="form-group">
-          <label>Search Style</label>
-          <input type="text" class="input" placeholder="Enter Style ID" />
-          <div class="dropdown"></div>
-        </div>
+      <select class="size-select">
+        <option>Select Size</option>
+        <option>Add Size</option>
+      </select>
 
-        <div class="form-group">
-          <label>Size</label>
-          <select class="size-select">
-            <option>Select Size</option>
-            <option>Add Size</option>
-          </select>
-
-          <div class="size-grid hidden">
-            <button class="size-btn">FS</button>
-            <button class="size-btn">XS</button>
-            <button class="size-btn">S</button>
-            <button class="size-btn">M</button>
-            <button class="size-btn">L</button>
-            <button class="size-btn">XL</button>
-            <button class="size-btn">XXL</button>
-            <button class="size-btn">3XL</button>
-            <button class="size-btn">4XL</button>
-            <button class="size-btn">5XL</button>
-            <button class="size-btn">6XL</button>
-            <button class="size-btn">7XL</button>
-            <button class="size-btn">8XL</button>
-            <button class="size-btn">9XL</button>
-            <button class="size-btn">10XL</button>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Label Units</label>
-          <input type="number" class="input" placeholder="Enter label quantity" />
-        </div>
-
+      <div class="size-grid hidden">
+        <button class="size-btn">FS</button>
+        <button class="size-btn">XS</button>
+        <button class="size-btn">S</button>
+        <button class="size-btn">M</button>
+        <button class="size-btn">L</button>
+        <button class="size-btn">XL</button>
+        <button class="size-btn">XXL</button>
+        <button class="size-btn">3XL</button>
+        <button class="size-btn">4XL</button>
+        <button class="size-btn">5XL</button>
+        <button class="size-btn">6XL</button>
+        <button class="size-btn">7XL</button>
+        <button class="size-btn">8XL</button>
+        <button class="size-btn">9XL</button>
+        <button class="size-btn">10XL</button>
       </div>
+    </div>
 
-      <div class="image-panel">
-        <div class="image-box">
-          <img src="images/placeholder.png" alt="Preview" />
-        </div>
-        <div class="image-meta">
-          <div class="meta-title">Title</div>
-          <div class="meta-category">Category</div>
-        </div>
+    <!-- LABEL UNITS (HIDDEN UNTIL SIZE) -->
+    <div class="form-group label-section hidden">
+      <label>Label Units</label>
+      <input type="number" class="input" placeholder="Enter label quantity" />
+    </div>
+
+    <!-- IMAGE -->
+    <div class="image-panel">
+      <div class="image-box">
+        <img src="images/placeholder.png" alt="Preview" />
       </div>
-
+      <div class="image-meta">
+        <div class="meta-title">Title</div>
+        <div class="meta-category">Category</div>
+      </div>
     </div>
 
     <!-- SAVE -->
@@ -105,11 +101,7 @@
         </thead>
         <tbody>
           <tr>
-            <td data-label="Lot ID">LOT001</td>
-            <td data-label="SKU">SKU123</td>
-            <td data-label="Style">STY009</td>
-            <td data-label="Size">M</td>
-            <td data-label="Label Units">10</td>
+            <td colspan="5" class="empty">No pending submission</td>
           </tr>
         </tbody>
       </table>
