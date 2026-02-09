@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <title>Label Management</title>
-  <link rel="stylesheet" href="css/style.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
@@ -13,9 +15,11 @@
     <div class="header-left">
       <img src="images/logo.png" alt="Logo" class="logo" />
     </div>
+
     <div class="header-center">
       <h1>Label Management</h1>
     </div>
+
     <div class="header-right"></div>
   </header>
 
@@ -26,8 +30,9 @@
 
       <!-- LOT ID -->
       <div class="form-group">
-        <label>Lot ID</label>
+        <label for="lotId">Lot ID</label>
         <input
+          id="lotId"
           type="text"
           class="input"
           placeholder="Enter Lot ID (alphanumeric)"
@@ -37,56 +42,65 @@
       <!-- SEARCH + IMAGE -->
       <div class="search-image-wrapper">
 
-        <!-- LEFT -->
+        <!-- LEFT PANEL -->
         <div class="search-panel">
 
+          <!-- SEARCH -->
           <div class="form-group">
-            <label>Search SKU / Style</label>
+            <label for="searchInput">Search SKU / Style</label>
             <input
+              id="searchInput"
               type="text"
               class="input"
-              placeholder="Search by SKU or Style ID"
+              placeholder="Type SKU or Style ID"
             />
+
+            <!-- Suggestions dropdown (UI only) -->
             <div class="dropdown">
-              <!-- suggestions will render here -->
+              <!-- Suggestions will render here -->
             </div>
           </div>
 
+          <!-- SIZE -->
           <div class="form-group">
             <label>Select Size</label>
 
             <div class="size-grid">
+              <button class="size-btn">FS</button>
+              <button class="size-btn">XS</button>
               <button class="size-btn">S</button>
               <button class="size-btn">M</button>
               <button class="size-btn">L</button>
               <button class="size-btn">XL</button>
+              <button class="size-btn">XXL</button>
             </div>
 
-            <button class="add-size-btn">+ Add Size</button>
+            <button class="add-size-btn" type="button">+ Add Size</button>
           </div>
 
         </div>
 
-        <!-- RIGHT -->
+        <!-- RIGHT PANEL -->
         <div class="image-panel">
           <div class="image-box">
             <img
-              src="https://via.placeholder.com/300x380?text=No+Image"
+              src="images/placeholder.png"
               alt="Product Preview"
+              id="productImage"
             />
           </div>
 
           <div class="image-meta">
-            <div class="meta-title">Title</div>
-            <div class="meta-category">Category</div>
+            <div class="meta-title" id="productTitle">Title</div>
+            <div class="meta-category" id="productCategory">Category</div>
           </div>
         </div>
 
       </div>
 
-      <!-- SAVE -->
+      <!-- ACTION -->
       <div class="action-bar">
-        <button class="save-btn">Save</button>
+        <button class="save-btn" type="button">Save</button>
       </div>
 
     </div>
@@ -95,4 +109,3 @@
 
 </body>
 </html>
-
