@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <title>Label Management</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- UI -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -24,20 +22,28 @@
 
   <div class="card">
 
+    <!-- LOT ID -->
     <div class="form-group lot-id-group">
-      <label>Lot ID</label>
-      <input type="text" class="input" placeholder="Lot ID" />
+      <label for="lotId">Lot ID</label>
+      <input id="lotId" type="text" class="input" placeholder="Lot ID" />
     </div>
 
+    <!-- SEARCH STYLE -->
     <div class="form-group">
-      <label>Search Style</label>
-      <input type="text" class="input" placeholder="Enter Style ID" />
+      <label for="styleSearch">Search Style</label>
+      <input
+        id="styleSearch"
+        type="text"
+        class="input"
+        placeholder="Enter Style ID"
+      />
       <div class="dropdown"></div>
     </div>
 
+    <!-- SIZE -->
     <div class="form-group size-section hidden">
-      <label>Size</label>
-      <select class="size-select">
+      <label for="sizeSelect">Size</label>
+      <select id="sizeSelect" class="size-select">
         <option>Select Size</option>
         <option>Add Size</option>
       </select>
@@ -61,11 +67,18 @@
       </div>
     </div>
 
+    <!-- LABEL UNITS -->
     <div class="form-group label-section hidden">
-      <label>Label Units</label>
-      <input type="number" class="input" placeholder="Enter label quantity" />
+      <label for="labelUnits">Label Units</label>
+      <input
+        id="labelUnits"
+        type="number"
+        class="input"
+        placeholder="Enter label quantity"
+      />
     </div>
 
+    <!-- IMAGE -->
     <div class="image-panel">
       <div class="image-box">
         <img src="images/placeholder.png" alt="Preview" />
@@ -76,10 +89,12 @@
       </div>
     </div>
 
+    <!-- SAVE -->
     <div class="action-bar center">
       <button class="save-btn">Save</button>
     </div>
 
+    <!-- PENDING -->
     <div class="pending-section">
       <h3>Pending Submission</h3>
       <table class="pending-table">
@@ -100,6 +115,7 @@
       </table>
     </div>
 
+    <!-- SUBMIT -->
     <div class="action-bar center">
       <button class="submit-btn">Submit</button>
     </div>
@@ -108,9 +124,8 @@
 
 </main>
 
-<!-- 🔥 FORCE MODULE LOAD -->
+<!-- MODULE LOAD -->
 <script type="module">
-  console.log("🔥 inline module running");
   import "./js/app.js";
 </script>
 
